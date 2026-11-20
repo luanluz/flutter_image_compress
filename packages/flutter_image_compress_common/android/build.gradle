@@ -1,20 +1,6 @@
 group 'com.fluttercandies.flutter_image_compress'
 version '1.0-SNAPSHOT'
 
-// Keep this top-level: a conditional buildscript block can run after Gradle
-// has resolved the script classpath (see issue #400).
-buildscript {
-    ext.kotlin_version = '1.8.20'
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 rootProject.allprojects {
     repositories {
         google()
@@ -24,46 +10,22 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 
-// AGP creates its built-in Kotlin extension when the Android plugin is
-// applied. Checking before this point always misdetects the built-in path.
-def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0] as int
-def builtInKotlinProperty = project.findProperty("android.builtInKotlin")
-// AGP 9+ enables built-in Kotlin by default when the property is absent.
-def builtInKotlinRequested = builtInKotlinProperty == null
-        ? agpMajor >= 9
-        : builtInKotlinProperty.toString().toBoolean()
-def hasKotlinExtension = project.extensions.findByName("kotlin") != null
-def useBuiltInKotlin = builtInKotlinRequested && hasKotlinExtension
-
-if (!useBuiltInKotlin) {
-    apply plugin: 'kotlin-android'
-}
-
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace 'com.fluttercandies.flutter_image_compress'
-    }
-
-    compileSdkVersion 34
+    namespace 'com.fluttercandies.flutter_image_compress'
+    compileSdk 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk 21
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    if (!useBuiltInKotlin) {
-        kotlinOptions {
-            jvmTarget = '17'
-        }
     }
 }
 
@@ -81,10 +43,8 @@ dependencies {
     implementation 'commons-io:commons-io:2.16.1'
 }
 
-if (useBuiltInKotlin) {
-    kotlin {
-        compilerOptions {
-            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }

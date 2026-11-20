@@ -1,3 +1,9 @@
+## 1.1.2
+
+ - **FIX**(Android): migrate to built-in Kotlin (drop applying `kotlin-android` / KGP classpath) for AGP 9 ([#413](https://github.com/fluttercandies/flutter_image_compress/issues/413) / [#416](https://github.com/fluttercandies/flutter_image_compress/issues/416); same direction as [photo_manager#1451](https://github.com/fluttercandies/flutter_photo_manager/pull/1451) / closed [#414](https://github.com/fluttercandies/flutter_image_compress/pull/414)).
+ - **FIX**(Android): AGP 9-ready DSL (`compileSdk`/`minSdk`) and `compileSdk` 36.
+ - Requires Flutter **3.44+** (KGP 2.0+ / AGP 9 consumer apps).
+
 ## 1.1.1
 
  - **FIX**(Android): replace deprecated EXIF ISO tag ([#403](https://github.com/fluttercandies/flutter_image_compress/issues/403)). ([5c28723f](https://github.com/fluttercandies/flutter_image_compress/commit/5c28723f779cf6048994889326a6c49cb3190b3d))

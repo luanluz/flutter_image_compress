@@ -1,3 +1,8 @@
+## 2.5.2
+
+ - **FIX**(Android): consume forked `flutter_image_compress_common` 1.1.2 (KGP false-positive / AGP 9 DSL).
+ - Use path dependencies on sibling packages so a single git checkout resolves the fork end-to-end.
+
 ## 2.5.1
 
  - **FIX**(Android): handle Gradle 9 Kotlin modes safely ([#401](https://github.com/fluttercandies/flutter_image_compress/issues/401)). ([e4bbccae](https://github.com/fluttercandies/flutter_image_compress/commit/e4bbccaefd8243ecff9be1226d926bafba536108))
